@@ -1,0 +1,38 @@
+sudo: required
+
+language: node_js
+
+node_js: stable
+
+dist: trusty
+
+before_script:
+  - npm install -g ionic cordova
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sudo apt-get update
+  - sudo apt-get install -y libappindicator1 fonts-liberation
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome*.deb
+
+script:
+  - npm run test
+  - npm run e2e
+  - npm run build:prod
+
+after_script:
+  - "npm install coveralls && cat ./coverage/lcov.info | coveralls"
+
+deploy:
+ provider: pages
+ skip-cleanup: true
+ github-token: $GITHUB_TOKEN
+ keep-history: true
+ on:
+   branch: master
+ local_dir: www
+ 
+env:
+  global:
+    secure: GWq9Rk45rTFgF2CCLUanm2aSEdmulQGFZTeI+z0C/SKU2JODxgDTMy9njiGtZTnOSXvRfX1cLXvXkdavU7RjYP6Hri37sEre6jTYCVo1lFlsAvYboosVzHYdf9GnvxsAvqzyg6Il8s04vW3nydGIo7W3vMrcovkCjd4Rybf4G+GRLK+J8UE3AZQLi9q4boEMPeD6liEpiCpnaKG9KANWOiLrtqukDGbCoga5iY0f098QGX3Q/J8s0a2K76QYQRxAj3dFyJYy3C232p2uEbnI5Vmj/0VNPZWNT+ALB2ykJqCykbI62vqUaZVQP3tk2v6AaU+LQVaxCT90qQz5qoOk7AAj1oHFi8nYhpUWb/z9mLO2PxFj6XYPNU837zYc+sFfKlyquL1NsJLDFjmLqJTZ+cfeI6qRf3BVtMZ2ZQsRq4P+BJEPahVgsVjGmJ5iC9QtrCWOr5oh0NnZdC7GO3OPIBGS3yQnA0lZAeUJiZocjgFiZ62xieFEYnb09lNaH+fgc7rQpNcb3CwMAGYvm/Re23A+HuHwQ4oPQKe3bcbDo7BsO7rsEcgpfJBVPGUHrxoWBARL4ILSag2aG3/2OfNwxk22e60xOtqMj5N7Z2QZNdhm0huAef75s0/YjNaseCh4G9EwejY7UQf7X0/SPAop6HjntS3Pq/GdkKyjLsN+Bjg=

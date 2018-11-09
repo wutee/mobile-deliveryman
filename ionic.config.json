@@ -1,0 +1,7 @@
+{
+  "name": "propsy-mobile-deliveryman",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
