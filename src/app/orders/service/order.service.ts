@@ -13,7 +13,7 @@ export class OrderService {
   getAwaitingOrders() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl).subscribe(data => {
-        resolve(data);
+        resolve(Object.values(data).filter(order => order.status === 2));
       }, err => {
         console.log(err);
       });
