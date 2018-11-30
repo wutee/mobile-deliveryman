@@ -17,5 +17,19 @@ export class OrderService {
       }, err => {
         console.log(err);
       });
-    });  }
+    });
+  }
+
+  getOrdersWithPhrase(phrase) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl).subscribe(data => {
+        resolve(Object.values(data).filter(
+          order => (
+            order.restaurant.nameSlug.toLowerCase().search(phrase.toLowerCase()) !== -1 && order.status === 2))
+        );
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 }
