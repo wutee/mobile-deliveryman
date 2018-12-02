@@ -5,14 +5,14 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class OrderService {
-  apiUrl = 'https://propsy-backend-v0.herokuapp.com/api/food-orders?eagerload=false';
+  apiUrl = 'https://propsy-backend-v0.herokuapp.com/api/food-orders';
 
   constructor(public http: HttpClient) {
   }
 
   getAwaitingOrders() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl).subscribe(data => {
+      this.http.put(this.apiUrl, {}).subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
