@@ -11,8 +11,7 @@
     "test": "ng test --watch=false --code-coverage",
     "test:watch": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "fast-rest": "xmysql -h sql.modasu.home.pl -u 07500260_propsy -p '+;:ake!T6@sW' -d 07500260_propsy"
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/common": "~6.1.1",
@@ -51,8 +50,9 @@
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.12.0",
+    "@types/rx": "^4.1.1",
     "codelyzer": "~4.5.0",
-    "jasmine-core": "~2.99.1",
+    "jasmine-core": "~2.9
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.0.0",
     "karma-chrome-launcher": "~2.2.0",
