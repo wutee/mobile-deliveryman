@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Map
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3>
+    Ionic GoogleMaps Starter
+  </h3>
+  <div id="map_canvas">
+    <button ion-button full icon-left (click)="startTracking()" *ngIf="!isTracking">
+      <ion-icon name="locate"></ion-icon>
+      Start Tracking
+    </button>
+  </div>
+</ion-content>

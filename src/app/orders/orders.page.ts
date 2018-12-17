@@ -14,7 +14,6 @@ export class OrdersPage {
   clickedOrder = {restaurant: {nameSlug: ''}};
 
 
-
   constructor(public orderService: OrderService) {
     this.getAwaitingOrders();
 
@@ -43,6 +42,9 @@ export class OrdersPage {
   getDetails(order) {
     this.isList = false;
     this.clickedOrder = order;
+  }
+  getMap(orderID) {
+    window.location.replace('map/' + orderID);
   }
 
   goBack() {
