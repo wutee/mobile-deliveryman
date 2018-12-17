@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import {LoginPageModule} from './login/login.module';
 
 
 import { GeopositionService } from './map/service/geoposition.service';
@@ -19,7 +20,7 @@ import { IonicStorageModule } from '../../node_modules/@ionic/storage';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicStorageModule.forRoot(), IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule, LoginPageModule],
   providers: [
     StatusBar,
     SplashScreen,
