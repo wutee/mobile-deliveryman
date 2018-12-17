@@ -25,19 +25,24 @@ export class MapPage implements OnInit {
     this.device_geoposition = await this.geopositionService.get_device_geoposition();
 
     this.loadMap();
-  //  this.get_restaurants_geoposition();
+    //  this.get_restaurants_geoposition();
     this.draw_road();
   }
 
-  constructor(private platformService: Platform, private geopositionService: GeopositionService, private googleMaps: GoogleMaps, private route: ActivatedRoute) {
+  constructor(
+    private platformService: Platform,
+    private geopositionService: GeopositionService,
+    private route: ActivatedRoute
+  ) {
     this.route.snapshot.paramMap.get('id');
   }
+
   draw_road() {
     //let choice_restaurant:
-    let path2:[
-      {lat: 52.772, lng: 21.214},
-      {lat: 52.291, lng: 23.821}
-    ];
+    let path2: [
+      { lat: 52.772, lng: 21.214 },
+      { lat: 52.291, lng: 23.821 }
+      ];
 
     /*
     let path: [
@@ -66,7 +71,7 @@ export class MapPage implements OnInit {
   }
 
   private create_map(latitude: number, longitude: number, zoom: number, tilt: number): void {
-    this.map = this.googleMaps.create('map_canvas', {
+    this.map = GoogleMaps.create('map_canvas', {
       camera: {
         target: {
           lat: latitude,
@@ -89,14 +94,15 @@ export class MapPage implements OnInit {
       }
     });
   }
-/*
-  get_restaurants_geoposition(): void {
-    this.geopositionService.get_restaurants_geoposition()
-      .then(resp => {
-        this.restaurants_geoposition = resp;
-        resp.forEach(r => this.add_maker(r.restaurant.nameSlug, 'red', r.latitude, r.longitude));
-      })
-      .catch(err => console.log(err));
-  }
-*/
+
+  /*
+    get_restaurants_geoposition(): void {
+      this.geopositionService.get_restaurants_geoposition()
+        .then(resp => {
+          this.restaurants_geoposition = resp;
+          resp.forEach(r => this.add_maker(r.restaurant.nameSlug, 'red', r.latitude, r.longitude));
+        })
+        .catch(err => console.log(err));
+    }
+  */
 }

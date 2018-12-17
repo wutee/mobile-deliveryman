@@ -6,12 +6,12 @@
 
 <ion-content padding>
   <div inset *ngIf="isList;else orderDetails">
-    <form (ngSubmit)="search($event)">
-      <ion-item>
-        <ion-input placeholder="Filter phrase" type="text" name="restaurant"></ion-input>
-        <ion-button type="submit" block>Search</ion-button>
-      </ion-item>
-    </form>
+
+    <ion-item>
+      <ion-input (ionChange)="search($event)" placeholder="Filter phrase" type="text" name="restaurant"></ion-input>
+      <ion-button type="submit" block>Search</ion-button>
+    </ion-item>
+
     <ion-card *ngFor="let order of orders">
       <ion-card-title>
         <ion-badge>{{ order.date }}</ion-badge>
@@ -46,7 +46,10 @@
             <ion-label>
               <h2>Food items:</h2>
               <div *ngFor="let item of selectedOrder.foodItems">
-                <p><ion-icon name="pizza"></ion-icon> {{ item.nameSlug }}</p>
+                <p>
+                  <ion-icon name="pizza"></ion-icon>
+                  {{ item.nameSlug }}
+                </p>
               </div>
             </ion-label>
           </ion-item>
