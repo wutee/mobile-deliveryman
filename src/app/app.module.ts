@@ -11,13 +11,21 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
+import { GeopositionService } from './map/service/geoposition.service';
+import { Geolocation } from "@ionic-native/geolocation/ngx";
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
+import {Import} from '@angular/compiler-cli/src/ngtsc/host';
+import { IonicStorageModule } from '../../node_modules/@ionic/storage';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicStorageModule.forRoot(), IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
+    GoogleMaps,
+    GeopositionService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
