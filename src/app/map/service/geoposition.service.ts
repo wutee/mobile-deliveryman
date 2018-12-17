@@ -25,7 +25,7 @@ export class GeopositionService {
 
     return device_geoposition
   }
-
+/*
   public async get_restaurant_geoposition(restaurant: Restaurant): Promise<RestaurantGeoposition> {
     let restaurant_geoposition: RestaurantGeoposition = null;
 
@@ -57,21 +57,5 @@ export class GeopositionService {
     return restaurnts_geoposition
   }
 
-
-  public draw_road(device_geoposition: Geoposition, restaurnats_geoposition: order.restaurant.nameSlug){
-    let choice_restaurant: RestaurantGeoposition = [0];
-    let path: [
-      {choice_restaurant},
-      {get_device_geoposition}
-      ];
-
-    let flightPath = new this.google.maps.Polyline({
-      path: path,
-      geodesic: true,
-      strokeColor: '#FF0000',
-      strokeOpacity: 1.0,
-      strokeWeight: 2
-    });
-    return flightPath;
-  }
+*/
 }

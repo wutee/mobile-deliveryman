@@ -6,7 +6,6 @@ import {GeopositionService} from './service/geoposition.service';
 import {RestaurantGeoposition} from './model/restaurant-geoposition';
 import {ActivatedRoute} from '@angular/router';
 
-declare var google;
 
 @Component({
   selector: 'app-map',
@@ -17,7 +16,8 @@ export class MapPage implements OnInit {
 
   map: GoogleMap;
   device_geoposition: Geoposition;
-  restaurants_geoposition: RestaurantGeoposition[];
+//  restaurants_geoposition: RestaurantGeoposition[];
+  private google: any;
 
 
   async ngOnInit() {
@@ -25,12 +25,34 @@ export class MapPage implements OnInit {
     this.device_geoposition = await this.geopositionService.get_device_geoposition();
 
     this.loadMap();
-    this.get_restaurants_geoposition();
+  //  this.get_restaurants_geoposition();
     this.draw_road();
   }
 
   constructor(private platformService: Platform, private geopositionService: GeopositionService, private googleMaps: GoogleMaps, private route: ActivatedRoute) {
     this.route.snapshot.paramMap.get('id');
+  }
+  draw_road() {
+    //let choice_restaurant:
+    let path2:[
+      {lat: 52.772, lng: 21.214},
+      {lat: 52.291, lng: 23.821}
+    ];
+
+    /*
+    let path: [
+      {choice_restaurant},
+      {get_device_geoposition}
+      ];
+*/
+    let flightPath = new this.google.maps.Polyline({
+      path: path2,
+      geodesic: true,
+      strokeColor: '#FF0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
+    return flightPath;
   }
 
   loadMap(): void {
@@ -67,7 +89,7 @@ export class MapPage implements OnInit {
       }
     });
   }
-
+/*
   get_restaurants_geoposition(): void {
     this.geopositionService.get_restaurants_geoposition()
       .then(resp => {
@@ -76,12 +98,5 @@ export class MapPage implements OnInit {
       })
       .catch(err => console.log(err));
   }
-
-  draw_road(): void {
-    this.geopositionService.draw_road()
-      .then(resp => {
-        this.draw_road = resp;
-      })
-      .catch(err => console.log((err)));
-  }
+*/
 }
