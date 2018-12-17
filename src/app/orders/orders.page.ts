@@ -11,7 +11,7 @@ import {FoodOrder, FoodOrderResourceService} from '../../client';
 export class OrdersPage {
   orders: any;
   isList: boolean;
-  clickedOrder = {restaurant: {nameSlug: ''}};
+  selectedOrder: any;
 
 
 
@@ -24,7 +24,7 @@ export class OrdersPage {
     this.isList = true;
     this.orderService.getAwaitingOrders()
       .then((data: FoodOrder[]) => {
-        this.orders = data.filter((order) => (order.status === 2 || order.status === 3) && !!!order.delivery);
+        this.orders = data;
       });
   }
 
@@ -42,7 +42,7 @@ export class OrdersPage {
 
   getDetails(order) {
     this.isList = false;
-    this.clickedOrder = order;
+    this.selectedOrder = order;
   }
 
   goBack() {

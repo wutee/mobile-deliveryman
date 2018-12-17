@@ -22,29 +22,29 @@
         {{ order.restaurant.address }}
       </ion-card-content>
       <ion-button size="small" color="success" (click)="getDetails(order)">Details</ion-button>
-      <ion-button size="small" color="warning">Assign</ion-button>
+      <ion-button size="small" color="warning" (click)="assign(order.id)">Assign</ion-button>
     </ion-card>
   </div>
   <ng-template #orderDetails>
     <ion-button (click)="goBack()"><</ion-button>
-    <ion-card *ngFor="let order of orders">
+    <ion-card>
       <ion-card-title>
-        <ion-badge>{{ order.date }}</ion-badge>
+        <ion-badge>{{ selectedOrder.date }}</ion-badge>
 
-        {{ order.restaurant.nameSlug }}
+        {{ selectedOrder.restaurant.nameSlug }}
       </ion-card-title>
       <ion-card-content>
         <ion-list>
           <ion-item>
             <ion-label>
               <h2>Restaurant address:</h2>
-              <p>{{ order.restaurant.address }}</p>
+              <p>{{ selectedOrder.restaurant.address }}</p>
             </ion-label>
           </ion-item>
           <ion-item>
             <ion-label>
               <h2>Food items:</h2>
-              <div *ngFor="let item of order.foodItems">
+              <div *ngFor="let item of selectedOrder.foodItems">
                 <p><ion-icon name="pizza"></ion-icon> {{ item.nameSlug }}</p>
               </div>
             </ion-label>
@@ -52,26 +52,26 @@
           <ion-item>
             <ion-label>
               <h2>Price:</h2>
-              <p>{{ order.price }}</p>
+              <p>{{ selectedOrder.price }}</p>
             </ion-label>
           </ion-item>
-          <ion-item *ngIf="order.userOpinion;else noOpinion">
+          <ion-item *ngIf="selectedOrder.userOpinion;else noOpinion">
             <ion-label>
               <h2>User opnion:</h2>
-              <p>{{ order.userOpinion }}</p>
+              <p>{{ selectedOrder.userOpinion }}</p>
             </ion-label>
           </ion-item>
           <ng-template #noOpinion></ng-template>
-          <ion-item *ngIf="order.userComment;else noComment">
+          <ion-item *ngIf="selectedOrder.userComment;else noComment">
             <ion-label>
               <h2>User comment:</h2>
-              <p>{{ order.userComment }}</p>
+              <p>{{ selectedOrder.userComment }}</p>
             </ion-label>
           </ion-item>
           <ng-template #noComment></ng-template>
         </ion-list>
       </ion-card-content>
-      <ion-button (click)="assign(order.id)" size="small" color="warning">Assign</ion-button>
+      <ion-button (click)="assign(selectedOrder.id)" size="small" color="warning">Assign</ion-button>
     </ion-card>
   </ng-template>
 </ion-content>

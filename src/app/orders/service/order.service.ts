@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  apiUrl = 'https://propsy-backend-v0.herokuapp.com/api/food-orders?eagerload=false';
+  apiUrl = 'https://propsy-backend-v0.herokuapp.com/api/food-orders';
 
   constructor(public http: HttpClient) {
   }
@@ -13,7 +14,10 @@ export class OrderService {
   getAwaitingOrders() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl).subscribe(data => {
-        resolve(data);
+        resolve(Object.values(data).filter(
+          order => order.restaurant !== null && order.status === 2
+          )
+        );
       }, err => {
         console.log(err);
       });
@@ -25,7 +29,7 @@ export class OrderService {
       this.http.get(this.apiUrl).subscribe(data => {
         resolve(Object.values(data).filter(
           order => (
-            order.restaurant.nameSlug.toLowerCase().search(phrase.toLowerCase()) !== -1 && order.status === 2))
+            order.restaurant !== null && order.restaurant.nameSlug.toLowerCase().search(phrase.toLowerCase()) !== -1 && order.status === 2))
         );
       }, err => {
         console.log(err);
@@ -34,6 +38,14 @@ export class OrderService {
   }
 
   assignOrder(orderID) {
-    this.http.get(this.apiUrl);
+    this.http.get(this.apiUrl + '/' + orderID).subscribe(data => { console.log(data);
+        // this.http.put(this.apiUrl, data.toString()).subscribe(
+        //   response => {
+        //     console.log(response);
+        //   }
+        // );
+      }, err => {
+      console.log(err);
+    });
   }
 }
