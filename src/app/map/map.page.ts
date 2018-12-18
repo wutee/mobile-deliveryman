@@ -32,7 +32,8 @@ export class MapPage implements OnInit {
   constructor(
     private platformService: Platform,
     private geopositionService: GeopositionService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private googleMaps: GoogleMaps
   ) {
     this.route.snapshot.paramMap.get('id');
   }
@@ -71,7 +72,7 @@ export class MapPage implements OnInit {
   }
 
   private create_map(latitude: number, longitude: number, zoom: number, tilt: number): void {
-    this.map = GoogleMaps.create('map_canvas', {
+    this.map = (this.googleMaps as any).create('map_canvas', {
       camera: {
         target: {
           lat: latitude,

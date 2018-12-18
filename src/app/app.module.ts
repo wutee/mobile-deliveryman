@@ -16,6 +16,8 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {GoogleMaps} from '@ionic-native/google-maps/ngx';
 import {Import} from '@angular/compiler-cli/src/ngtsc/host';
 import {IonicStorageModule} from '@ionic/storage';
+import {AuthModule} from '../lib/auth/auth.module';
+import {ApiModule} from '../client';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {IonicStorageModule} from '@ionic/storage';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    LoginPageModule
+    LoginPageModule,
+    AuthModule,
+    ApiModule
   ],
   providers: [
     StatusBar,

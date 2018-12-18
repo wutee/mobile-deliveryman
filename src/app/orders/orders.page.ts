@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from './service/order.service';
 import {FoodOrder, FoodOrderResourceService} from '../../client';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,10 @@ export class OrdersPage {
   selectedOrder: any;
 
 
-  constructor(public orderService: OrderService) {
+  constructor(
+    public orderService: OrderService,
+    private router: Router
+  ) {
     this.getAwaitingOrders();
 
   }
@@ -39,8 +43,8 @@ export class OrdersPage {
     this.selectedOrder = order;
   }
 
-  getMap(orderID) {
-    window.location.replace('map/' + orderID);
+  getMap(orderId: number): void {
+    this.router.navigate(['map', orderId]);
   }
 
   goBack() {
