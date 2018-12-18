@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-avatar>
+      <img src="assets/logo.png">
+    </ion-avatar>
+    <ion-title>wutee.deliveryman</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-thumbnail slot="start">
+    <img src="assets/logo.png">
+  </ion-thumbnail>
+
+  <ion-item>
+    <ion-label position="floating">Login</ion-label>
+    <ion-input (ionChange)="onInputChange($event)" name="username"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Hasło</ion-label>
+    <ion-input (ionChange)="onInputChange($event)" name="password" type="password"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-checkbox checked="true"></ion-checkbox>
+    <ion-label text-wrap>
+      Zgadzam się na przetwarzanie danych osobowych na mocy konieczności uzyskania pozytywnej oceny z projektu z
+      projektowania
+      oprogramowania
+    </ion-label>
+
+  </ion-item>
+  <ion-item>
+    <ion-label text-wrap style="font-weight: bold">
+      Dane do testowania są następujące<br/>
+      e2e / e2e
+    </ion-label>
+
+  </ion-item>
+
+
+  <ion-button
+    (click)="onSubmit()"
+    color="warning"
+    expand="full"
+    e2e-id="loginButton">
+    Login
+  </ion-button>
+
+
+</ion-content>
