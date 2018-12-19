@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { OrderService } from './service/order.service';
+import {Component, OnInit} from '@angular/core';
+import {OrderService} from './service/order.service';
 import {FoodOrder, FoodOrderResourceService} from '../../client';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,8 +15,10 @@ export class OrdersPage {
   selectedOrder: any;
 
 
-
-  constructor(public orderService: OrderService) {
+  constructor(
+    public orderService: OrderService,
+    private router: Router
+  ) {
     this.getAwaitingOrders();
 
   }
@@ -23,9 +26,7 @@ export class OrdersPage {
   getAwaitingOrders() {
     this.isList = true;
     this.orderService.getAwaitingOrders()
-      .then((data: FoodOrder[]) => {
-        this.orders = data;
-      });
+      .then(this.handleNewOrders());
   }
 
   assign(orderID) {
@@ -33,11 +34,8 @@ export class OrdersPage {
   }
 
   search(event) {
-    event.preventDefault();
-    this.orderService.getOrdersWithPhrase(event.target.elements[0].value)
-      .then(data => {
-        this.orders = data;
-      });
+    this.orderService.getOrdersWithPhrase(event.detail.value)
+      .then(this.handleNewOrders());
   }
 
   getDetails(order) {
@@ -45,8 +43,17 @@ export class OrdersPage {
     this.selectedOrder = order;
   }
 
+  getMap(orderId: number): void {
+    this.router.navigate(['map', orderId]);
+  }
+
   goBack() {
     this.isList = true;
   }
 
+  private handleNewOrders(): (data: FoodOrder[]) => void {
+    return (data: FoodOrder[]) => {
+      this.orders = data;
+    };
+  }
 }

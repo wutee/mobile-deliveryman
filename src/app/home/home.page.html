@@ -1,10 +1,18 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!--<ion-header>-->
+<!--<ion-toolbar>-->
+<!--<ion-title>Główna</ion-title>-->
+<!--</ion-toolbar>-->
+<!--</ion-header>-->
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+  <div class="flex-center" style="flex-wrap: wrap;">
+    <h1 style="width: 100%; text-align: center">Hello, deliveryman!</h1>
+    <img src="assets/logo.png">
+  </div>
+  <div class="flex-center">
+    <a [routerLink]="'/login'" class="propsy-link">Zaloguj się</a>
+    <a href="#" (click)="logout()" class="propsy-link">Wyloguj się</a>
+  </div>
+
+
 </ion-content>
