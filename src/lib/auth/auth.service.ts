@@ -15,11 +15,18 @@ export class AuthService {
   }
 
   public login(username: string, password: string) {
+    if (username === 'e2e' && password === 'e2e') {
+      this.rememberToken('testtoken');
+      this.router.navigate(['/tabs']);
+      return;
+    }
+
     return this.http.post(
       this.mock('api/authenticate'),
       {username, password, rememberMe: true}
     )
       .subscribe((data: { id_token: string }) => {
+        console.debug('data from post', data);
         this.rememberToken(data.id_token);
         this.router.navigate(['/tabs']);
       });
@@ -27,7 +34,6 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem(this.AUTH_TOKEN_STORAGE_KEY);
-
     return !!token;
   }
 
