@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderService} from './service/order.service';
+import {OrderService} from './order.service';
 import {FoodOrder, FoodOrderResourceService} from '../../client';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -10,10 +11,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage {
-  orders: any;
+  orders$: Observable<FoodOrder[]>;
   isList: boolean;
   selectedOrder: any;
-
 
   constructor(
     public orderService: OrderService,
@@ -23,19 +23,18 @@ export class OrdersPage {
 
   }
 
-  getAwaitingOrders() {
+  getAwaitingOrders(): void {
     this.isList = true;
-    this.orderService.getAwaitingOrders()
-      .then(this.handleNewOrders());
+    this.orders$ = this.orderService.getAwaitingOrders();
   }
 
-  assign(orderID) {
-    this.orderService.assignOrder(orderID);
+  assign(order: FoodOrder): void {
+    this.orderService.assignOrder(order)
+      .subscribe(() => this.getAwaitingOrders());
   }
 
   search(event) {
-    this.orderService.getOrdersWithPhrase(event.detail.value)
-      .then(this.handleNewOrders());
+    this.orders$ = this.orderService.getOrdersWithPhrase(event.detail.value);
   }
 
   getDetails(order) {
@@ -49,11 +48,5 @@ export class OrdersPage {
 
   goBack() {
     this.isList = true;
-  }
-
-  private handleNewOrders(): (data: FoodOrder[]) => void {
-    return (data: FoodOrder[]) => {
-      this.orders = data;
-    };
   }
 }
