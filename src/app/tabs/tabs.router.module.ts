@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
 import { HomePage } from '../home/home.page';
-import { AboutPage } from '../about/about.page';
 import {OrdersPage} from '../orders/orders.page';
 import { MapPage } from '../map/map.page';
 
@@ -21,11 +20,6 @@ const routes: Routes = [
         path: 'home',
         outlet: 'home',
         component: HomePage
-      },
-      {
-        path: 'about',
-        outlet: 'about',
-        component: AboutPage
       },
       {
         path: 'orders',

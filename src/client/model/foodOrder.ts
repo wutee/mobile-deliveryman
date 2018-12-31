@@ -12,21 +12,37 @@
 import { Customer } from './customer';
 import { DeliveryPersonnel } from './deliveryPersonnel';
 import { Food } from './food';
-import { Restaurant } from './restaurant';
+import {IRestaurant, Restaurant} from './restaurant';
+import {IUser} from './user';
 
+export enum OrderStatus {
+  NEW = 'NEW',
+  PAYMENT = 'PAYMENT',
+  CONFIRMED = 'CONFIRMED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  TO_PICK_UP = 'TO_PICK_UP',
+  IN_DELIVERY = 'IN_DELIVERY',
+  DELIVERED = 'DELIVERED'
+}
 
 export interface FoodOrder {
-    date: string;
-    delivery?: DeliveryPersonnel;
-    deliveryManComment?: string;
-    foodItems?: Array<Food>;
-    id?: number;
-    lastUpdatedDate: string;
-    loyaltyPoints?: number;
-    orderee?: Customer;
-    price: number;
-    restaurant?: Restaurant;
-    status: number;
-    userComment?: string;
-    userOpinion?: string;
+  id?: number;
+  timeRating?: number;
+  priceRating?: number;
+  qualityRating?: number;
+  loyaltyPoints?: number;
+  addressRating?: number;
+  // date?: Moment;
+  price?: number;
+  status?: OrderStatus;
+  purchaserOpinion?: string;
+  purchaserComment?: string;
+  city?: string;
+  phone?: string;
+  address?: string;
+  restaurant?: IRestaurant;
+  deliveryman?: IUser;
+  // purchaser?: IUser;
+  // foodItems?: IFood[];
+  // movements?: IFoodOrderMovement[];
 }
