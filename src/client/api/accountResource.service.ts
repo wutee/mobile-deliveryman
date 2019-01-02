@@ -31,7 +31,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class AccountResourceService {
 
-    protected basePath = 'https://propsy-backend-v0.herokuapp.com';
+    protected basePath = '';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
