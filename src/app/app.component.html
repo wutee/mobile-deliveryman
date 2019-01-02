@@ -1,3 +1,40 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" class="e2eLeftMenu">
+
+    <ion-header>
+      <ion-toolbar color="secondary">
+        <ion-title>deliveryman</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-item>Wyloguj się</ion-item>
+
+      </ion-list>
+    </ion-content>
+
+    <ion-footer>
+      <ion-toolbar color="secondary">
+        <ion-title>wut.ee propsy</ion-title>
+      </ion-toolbar>
+    </ion-footer>
+
+  </ion-menu>
+
+
+  <div class="ion-page" main>
+
+    <ion-header>
+      <ion-toolbar><ion-avatar>
+        <img src="assets/logo.png">
+      </ion-avatar>
+        <ion-title>wutee.deliveryman</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-router-outlet></ion-router-outlet>
+
+  </div>
+
 </ion-app>
