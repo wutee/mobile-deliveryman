@@ -4,6 +4,10 @@ import {FoodOrder, OrderStatus} from '../../client/model/foodOrder';
 import {from, Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {AuthService} from '../../lib/auth/auth.service';
+import {IUser} from '../../client';
+
+// import {FoodOrderResourceService} from '../../client/api/foodOrderResource.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +22,32 @@ export class OrderService {
     return this.http.get<FoodOrder[]>('api/food-orders')
       .pipe(
         map(i => i.filter(a => a.restaurant != null && a.status === OrderStatus.TO_PICK_UP)),
+        tap(i => {
+          this.foodOrders = i;
+        })
+      );
+
+  }
+
+  getMyActiveOrders(): Observable<FoodOrder[]> {
+    const myAccount: IUser = this.authService.whoAmI();
+    console.log(myAccount.email);
+    return this.http.get<FoodOrder[]>('api/food-orders')
+      .pipe(
+        map(i => i.filter(a => a.deliveryman.email === myAccount.email && a.status === OrderStatus.IN_DELIVERY )),
+        tap(i => {
+          this.foodOrders = i;
+        })
+      );
+
+  }
+
+  getMyDeliveredOrders(): Observable<FoodOrder[]> {
+    const myAccount: IUser = this.authService.whoAmI();
+    console.log(myAccount.email);
+    return this.http.get<FoodOrder[]>('api/food-orders')
+      .pipe(
+        map(i => i.filter(a => a.deliveryman.email === myAccount.email && a.status === OrderStatus.DELIVERED)),
         tap(i => {
           this.foodOrders = i;
         })

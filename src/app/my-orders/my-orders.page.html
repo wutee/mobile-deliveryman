@@ -10,12 +10,7 @@
 <ion-content padding>
   <div inset *ngIf="isList;else orderDetails">
 
-    <ion-item>
-      <ion-input (ionChange)="search($event)" placeholder="Filter phrase" type="text" name="restaurant"></ion-input>
-      <ion-button type="submit" block>Search</ion-button>
-    </ion-item>
-
-    <ion-card *ngFor="let order of orders$ | async">
+    <ion-card *ngFor="let order of activeOrders$ | async">
       <ion-card-title>
         <ion-badge>{{ order.date }}</ion-badge>
         <ion-badge color="secondary">{{ order.restaurant.nameSlug }}</ion-badge>
@@ -25,9 +20,23 @@
         Price: {{ order.price }}
       </ion-card-content>
       <ion-button size="small" color="success" (click)="getDetails(order)">Details</ion-button>
-      <ion-button size="small" color="warning" (click)="assign(order)">Assign</ion-button>
       <ion-button size="small" color="success" (click)="getMap(order.id)">Map</ion-button>
     </ion-card>
+
+    <ion-card *ngFor="let order of deliveredOrders$ | async">
+      <ion-card-title>
+        <ion-badge>{{ order.date }}</ion-badge>
+        <ion-badge color="secondary">{{ order.restaurant.nameSlug }}</ion-badge>
+        <ion-badge color="danger">DELIVERED</ion-badge>
+      </ion-card-title>
+      <ion-card-content>
+        Address: {{ order.restaurant.address }}<br>
+        Price: {{ order.price }}
+      </ion-card-content>
+      <ion-button size="small" color="success" (click)="getDetails(order)">Details</ion-button>
+      <ion-button size="small" color="success" (click)="getMap(order.id)">Map</ion-button>
+    </ion-card>
+
   </div>
   <ng-template #orderDetails>
     <ion-button (click)="goBack()"><</ion-button>
@@ -78,7 +87,6 @@
           <ng-template #noComment></ng-template>
         </ion-list>
       </ion-card-content>
-      <ion-button (click)="assign(selectedOrder)" size="small" color="warning">Assign</ion-button>
     </ion-card>
   </ng-template>
 </ion-content>

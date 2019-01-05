@@ -18,12 +18,10 @@ import {IonicStorageModule} from '@ionic/storage';
 import {AuthModule} from '../lib/auth/auth.module';
 import {ApiModule} from '../client';
 import { PropsyHttpInterceptor } from '../lib/propsy-http-interceptor';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MyOrdersComponent
+    AppComponent
   ],
   entryComponents: [],
   imports: [
