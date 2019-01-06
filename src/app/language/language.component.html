@@ -1,0 +1,3 @@
+<select [(ngModel)]="translationService.language" class=switch>
+  <option *ngFor="let language of translationService.languages" [ngValue]="language">{{language}}</option>
+</select>

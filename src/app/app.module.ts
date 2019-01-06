@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
@@ -19,6 +19,8 @@ import {AuthModule} from '../lib/auth/auth.module';
 import {ApiModule} from '../client';
 import { PropsyHttpInterceptor } from '../lib/propsy-http-interceptor';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import {TranslateModule} from './translator/translate.module';
+import {TranslationService} from './translator/translation.service';
 
 @NgModule({
   declarations: [
@@ -33,9 +35,11 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     AppRoutingModule,
     HttpClientModule,
     LoginPageModule,
+    TranslateModule.forRoot(),
     AuthModule,
     ApiModule
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -43,11 +47,12 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     GoogleMaps,
     GeopositionService,
     { provide: HTTP_INTERCEPTORS, useClass: PropsyHttpInterceptor, multi: true },
-    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+    TranslationService
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
 })
 export class AppModule {
 }
