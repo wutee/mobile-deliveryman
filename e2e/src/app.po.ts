@@ -5,7 +5,27 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.deepCss('app-root ion-content ion-button')).getText();
+  navigateToURL(url) {
+    return browser.get(url);
+  }
+
+  getLoginButton() {
+    return element(by.deepCss('app-root ion-button'));
+  }
+
+  getLoginField() {
+    return element(by.name('username'));
+  }
+
+  getPasswordField() {
+    return element(by.name('password'));
+  }
+
+  getAppHeaderTitle() {
+    return element(by.deepCss('app-root ion-toolbar ion-title'));
+  }
+
+  getHOneMarkup() {
+    return element(by.deepCss('app-root h1'));
   }
 }

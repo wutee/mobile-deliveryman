@@ -9,6 +9,9 @@
 
 <ion-content padding>
   <div inset *ngIf="isList;else orderDetails">
+    <div class="flex-center">
+      <h1 style="text-align: center">Your orders list</h1>
+    </div>
 
     <ion-item>
       <ion-input (ionChange)="search($event)" placeholder="Filter phrase" type="text" name="restaurant"></ion-input>
@@ -30,55 +33,55 @@
     </ion-card>
   </div>
   <ng-template #orderDetails>
-    <ion-button (click)="goBack()"><</ion-button>
-    <ion-card>
-      <ion-card-title>
-        <ion-badge>{{ selectedOrder.date }}</ion-badge>
+    <ion-button (click)="goBack()">
+      <</ion-button> <ion-card>
+        <ion-card-title>
+          <ion-badge>{{ selectedOrder.date }}</ion-badge>
 
-        {{ selectedOrder.restaurant.nameSlug }}
-      </ion-card-title>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>
-              <h2>Restaurant address:</h2>
-              <p>{{ selectedOrder.restaurant.address }}</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <h2>Food items:</h2>
-              <div *ngFor="let item of selectedOrder.foodItems">
-                <p>
-                  <ion-icon name="pizza"></ion-icon>
-                  {{ item.nameSlug }}
-                </p>
-              </div>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <h2>Price:</h2>
-              <p>{{ selectedOrder.price }}</p>
-            </ion-label>
-          </ion-item>
-          <ion-item *ngIf="selectedOrder.userOpinion;else noOpinion">
-            <ion-label>
-              <h2>User opnion:</h2>
-              <p>{{ selectedOrder.userOpinion }}</p>
-            </ion-label>
-          </ion-item>
-          <ng-template #noOpinion></ng-template>
-          <ion-item *ngIf="selectedOrder.userComment;else noComment">
-            <ion-label>
-              <h2>User comment:</h2>
-              <p>{{ selectedOrder.userComment }}</p>
-            </ion-label>
-          </ion-item>
-          <ng-template #noComment></ng-template>
-        </ion-list>
-      </ion-card-content>
-      <ion-button (click)="assign(selectedOrder)" size="small" color="warning">Assign</ion-button>
-    </ion-card>
+          {{ selectedOrder.restaurant.nameSlug }}
+        </ion-card-title>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label>
+                <h2>Restaurant address:</h2>
+                <p>{{ selectedOrder.restaurant.address }}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h2>Food items:</h2>
+                <div *ngFor="let item of selectedOrder.foodItems">
+                  <p>
+                    <ion-icon name="pizza"></ion-icon>
+                    {{ item.nameSlug }}
+                  </p>
+                </div>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h2>Price:</h2>
+                <p>{{ selectedOrder.price }}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="selectedOrder.userOpinion;else noOpinion">
+              <ion-label>
+                <h2>User opnion:</h2>
+                <p>{{ selectedOrder.userOpinion }}</p>
+              </ion-label>
+            </ion-item>
+            <ng-template #noOpinion></ng-template>
+            <ion-item *ngIf="selectedOrder.userComment;else noComment">
+              <ion-label>
+                <h2>User comment:</h2>
+                <p>{{ selectedOrder.userComment }}</p>
+              </ion-label>
+            </ion-item>
+            <ng-template #noComment></ng-template>
+          </ion-list>
+        </ion-card-content>
+        <ion-button (click)="assign(selectedOrder)" size="small" color="warning">Assign</ion-button>
+        </ion-card>
   </ng-template>
 </ion-content>
