@@ -34,12 +34,11 @@ export class OrderService {
     console.log(myAccount.email);
     return this.http.get<FoodOrder[]>('api/food-orders')
       .pipe(
-        map(i => i.filter(a => a.deliveryman.email === myAccount.email && a.status === OrderStatus.IN_DELIVERY )),
+        map(i => i.filter(a => a.deliveryman && a.deliveryman.email === myAccount.email && a.status === OrderStatus.IN_DELIVERY )),
         tap(i => {
           this.foodOrders = i;
         })
       );
-
   }
 
   getMyDeliveredOrders(): Observable<FoodOrder[]> {
@@ -47,7 +46,7 @@ export class OrderService {
     console.log(myAccount.email);
     return this.http.get<FoodOrder[]>('api/food-orders')
       .pipe(
-        map(i => i.filter(a => a.deliveryman.email === myAccount.email && a.status === OrderStatus.DELIVERED)),
+        map(i => i.filter(a => a.deliveryman && a.deliveryman.email === myAccount.email && a.status === OrderStatus.DELIVERED)),
         tap(i => {
           this.foodOrders = i;
         })
