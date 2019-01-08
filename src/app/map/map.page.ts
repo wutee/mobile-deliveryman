@@ -1,10 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {Platform} from '@ionic/angular';
-import {Geolocation, Geoposition} from '@ionic-native/geolocation/ngx';
-import {GoogleMaps, GoogleMap, GoogleMapOptions, Environment} from '@ionic-native/google-maps/ngx';
-import {GeopositionService} from './service/geoposition.service';
-import {RestaurantGeoposition} from './model/restaurant-geoposition';
-import {ActivatedRoute} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {OrderService} from '../orders/order.service';
 
 
 @Component({
@@ -14,96 +10,63 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class MapPage implements OnInit {
 
-  map: GoogleMap;
-  device_geoposition: Geoposition;
-//  restaurants_geoposition: RestaurantGeoposition[];
-  private google: any;
+  // public lat: Number = 24.799448;
+  // public lng: Number = 120.979021;
+
+  public lat: number;
+  public lng: number;
+  public origin: any;
+  public destination: any;
+  public id2: number;
+  public order: string;
+  public aaa: Number = 7;
+  private route: ActivatedRoute;
 
 
-  async ngOnInit() {
-    await this.platformService.ready();
-    this.device_geoposition = await this.geopositionService.get_device_geoposition();
+  @Input()
+  //id: number = this.orderService.id;
+  latr: number = this.orderService.lat;
+  lngr: number = this.orderService.lng;
 
-    this.loadMap();
-    //  this.get_restaurants_geoposition();
-    this.draw_road();
+  constructor( private orderService: OrderService, private router: Router) {
+
   }
 
-  constructor(
-    private platformService: Platform,
-    private geopositionService: GeopositionService,
-    private route: ActivatedRoute,
-    private googleMaps: GoogleMaps
-  ) {
-    this.route.snapshot.paramMap.get('id');
+  ngOnInit() {
+    //this.getUserLocation();
+    //this.id2 = this.orderService.id;
+   // this.order = this.orderService.order;
+    //console.log(this.order);
+    console.log('numer id to ');
+    console.log(this.lngr);
+    this.getDirection();
   }
+  // private getUserLocation() {
+  //   /// locate the user
+  //
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(position => {
+  //       this.lat = position.coords.latitude;
+  //       this.lng = position.coords.longitude;
+  //       this.origin = { lat: this.lat, lng: this.lng };
+  //       this.destination = { lat: 52.220072, lng: 21.0121157 };
+  //     });
+  //
+  //
+  //   }
+  //  }
+  getDirection() {
 
-  draw_road() {
-    //let choice_restaurant:
-    let path2: [
-      { lat: 52.772, lng: 21.214 },
-      { lat: 52.291, lng: 23.821 }
-      ];
-
-    /*
-    let path: [
-      {choice_restaurant},
-      {get_device_geoposition}
-      ];
-*/
-    let flightPath = new this.google.maps.Polyline({
-      path: path2,
-      geodesic: true,
-      strokeColor: '#FF0000',
-      strokeOpacity: 1.0,
-      strokeWeight: 2
-    });
-    return flightPath;
-  }
-
-  loadMap(): void {
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_DEBUG: 'AIzaSyBNvmvnqWm94i0QPftK95siu8dMErRnF1g',
-      API_KEY_FOR_BROWSER_RELEASE: 'AIzaSyBNvmvnqWm94i0QPftK95siu8dMErRnF1g'
-    });
-
-    this.create_map(this.device_geoposition.coords.latitude, this.device_geoposition.coords.longitude, 8, 18);
-    this.add_maker('Your position', 'blue', this.device_geoposition.coords.latitude, this.device_geoposition.coords.longitude);
-  }
-
-  private create_map(latitude: number, longitude: number, zoom: number, tilt: number): void {
-    this.map = (this.googleMaps as any).create('map_canvas', {
-      camera: {
-        target: {
-          lat: latitude,
-          lng: longitude
-        },
-        zoom: zoom,
-        tilt: tilt
-      }
-    });
-  }
-
-  private add_maker(title: string, icon: string, latitude: number, longitude: number): void {
-    this.map.addMarker({
-      title: title,
-      icon: icon,
-      animation: 'DROP',
-      position: {
-        lat: latitude,
-        lng: longitude
-      }
-    });
-  }
-
-  /*
-    get_restaurants_geoposition(): void {
-      this.geopositionService.get_restaurants_geoposition()
-        .then(resp => {
-          this.restaurants_geoposition = resp;
-          resp.forEach(r => this.add_maker(r.restaurant.nameSlug, 'red', r.latitude, r.longitude));
-        })
-        .catch(err => console.log(err));
+  console.log("basia ian  niaa");
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.origin = { lat: this.latr, lng: this.lngr};
+        //this.origin = { lat: 52.1912856, lng: 20.9540901 };
+        //this.origin = { lat: 52.214711, lng: 20.955437 };
+        this.destination  = { lat: 52.220072, lng: 21.0121157 };
+      });
     }
-  */
+  }
+
+
 }

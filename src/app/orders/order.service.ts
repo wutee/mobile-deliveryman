@@ -4,12 +4,18 @@ import {FoodOrder, OrderStatus} from '../../client/model/foodOrder';
 import {from, Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {AuthService} from '../../lib/auth/auth.service';
+import {MapPage} from '../map/map.page';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
   private foodOrders: FoodOrder[] = [];
+  public id: number;
+  public order: string;
+  public lat: number;
+  public lng: number;
+
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -40,4 +46,24 @@ export class OrderService {
     };
     return this.http.put<FoodOrder>('api/food-orders/', updatedOrder);
   }
+
+  setSelectedOrder(id: number) {
+    this.id = id;
+    console.log("serwicet");
+    console.log(this.id);
+
+  }
+  setSelectedOrders(lat: number, lng: number){
+    this.lat = lat;
+    this.lng = lng;
+  }
+  get_id() {
+    return this.id;
+  }
+  setOrder(order: string) {
+    this.order = order;
+    console.log("order::");
+    console.log(this.order);
+  }
 }
+

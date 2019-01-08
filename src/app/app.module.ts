@@ -11,7 +11,7 @@ import {AppComponent} from './app.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {LoginPageModule} from './login/login.module';
 
-import {GeopositionService} from './map/service/geoposition.service';
+
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {GoogleMaps} from '@ionic-native/google-maps/ngx';
 import {IonicStorageModule} from '@ionic/storage';
@@ -20,10 +20,11 @@ import {ApiModule} from '../client';
 import { PropsyHttpInterceptor } from '../lib/propsy-http-interceptor';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
   ],
   entryComponents: [],
   imports: [
@@ -41,7 +42,6 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     SplashScreen,
     Geolocation,
     GoogleMaps,
-    GeopositionService,
     { provide: HTTP_INTERCEPTORS, useClass: PropsyHttpInterceptor, multi: true },
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],

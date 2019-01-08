@@ -42,8 +42,14 @@ export class OrdersPage {
     this.selectedOrder = order;
   }
 
-  getMap(orderId: number): void {
-    this.router.navigate(['map', orderId]);
+  async getMap(order) {
+    await this.orderService.setSelectedOrders(order.restaurant.latitude, order.restaurant.longitude);
+    console.log("orders");
+    //this.orderService.setOrder(order);
+    //window.location.replace('tabs/(map:map)');
+  }
+  getMap2(order) {
+    window.location.replace('tabs/(map:map)');
   }
 
   goBack() {

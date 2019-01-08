@@ -6,6 +6,7 @@ import { HomePage } from '../home/home.page';
 import {OrdersPage} from '../orders/orders.page';
 import { MapPage } from '../map/map.page';
 
+
 const routes: Routes = [
   {
     path: 'tabs',
@@ -31,6 +32,11 @@ const routes: Routes = [
         outlet: 'map',
         component: MapPage
       }
+      // {
+      //   path: 'map-delivery',
+      //   outlet: 'map-delivery',
+      //   component: MapFromComponent
+      // }
     ]
   },
   {

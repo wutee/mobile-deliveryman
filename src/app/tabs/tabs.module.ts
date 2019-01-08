@@ -20,7 +20,7 @@ import { MapPageModule } from '../map/map.module';
     HomePageModule,
     ContactPageModule,
     OrdersPageModule,
-    MapPageModule,
+    MapPageModule
   ],
   declarations: [TabsPage]
 })

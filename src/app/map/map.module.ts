@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MapPage } from './map.page';
+import {AgmCoreModule} from '@agm/core/core.module';
+import {AgmDirectionModule} from 'agm-direction';
+
 
 const routes: Routes = [
   {
@@ -15,12 +18,19 @@ const routes: Routes = [
 ];
 
 @NgModule({
+
   imports: [
+    AgmCoreModule.forRoot({ // @agm/core
+      apiKey: 'AIzaSyBNvmvnqWm94i0QPftK95siu8dMErRnF1g',
+    }),
+    AgmDirectionModule,
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MapPage]
+  declarations: [MapPage],
+  providers: [],
+  bootstrap: [MapPage]
 })
 export class MapPageModule {}
