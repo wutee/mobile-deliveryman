@@ -17,7 +17,6 @@ const routes: Routes = [
   {
     path: '**', redirectTo: ''
   },
-  { path: 'my-orders', loadChildren: './my-orders/my-orders.module#MyOrdersPageModule' }
 ];
 
 @NgModule({

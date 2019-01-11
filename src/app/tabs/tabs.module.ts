@@ -10,7 +10,6 @@ import { ContactPageModule } from '../contact/contact.module';
 import { HomePageModule } from '../home/home.module';
 import {OrdersPageModule} from '../orders/orders.module';
 import { MapPageModule } from '../map/map.module';
-import {MyOrdersPageModule} from '../my-orders/my-orders.module';
 
 @NgModule({
   imports: [
@@ -19,7 +18,6 @@ import {MyOrdersPageModule} from '../my-orders/my-orders.module';
     FormsModule,
     TabsPageRoutingModule,
     HomePageModule,
-    MyOrdersPageModule,
     ContactPageModule,
     OrdersPageModule,
     MapPageModule,
