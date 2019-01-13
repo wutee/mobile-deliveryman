@@ -24,8 +24,7 @@ import {TranslationService} from './translator/translation.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MyOrdersComponent
+    AppComponent
   ],
   entryComponents: [],
   imports: [
@@ -52,7 +51,7 @@ import {TranslationService} from './translator/translation.service';
   ],
   bootstrap: [
     AppComponent
-  ],
+  ]
 })
 export class AppModule {
 }
