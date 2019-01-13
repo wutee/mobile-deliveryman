@@ -54,8 +54,8 @@ export class OrderService {
 
   }
   setSelectedOrders(lat: number, lng: number){
-    this.lat = lat;
-    this.lng = lng;
+    OrderService.lat= lat;
+    OrderService.lng= lng;
   }
   get_id() {
     return this.id;

@@ -23,50 +23,52 @@ export class MapPage implements OnInit {
   private route: ActivatedRoute;
 
 
-  @Input()
+  // @Input()
   //id: number = this.orderService.id;
-  latr: number = this.orderService.lat;
-  lngr: number = this.orderService.lng;
+  // latr: number = this.orderService.lat;
+  // lngr: number = this.orderService.lng;
 
   constructor( private orderService: OrderService, private router: Router) {
 
   }
 
   ngOnInit() {
-    //this.getUserLocation();
+    this.getUserLocation();
     //this.id2 = this.orderService.id;
    // this.order = this.orderService.order;
     //console.log(this.order);
-    console.log('numer id to ');
-    console.log(this.lngr);
-    this.getDirection();
+    console.log('wspolrzedne restauracji ');
+    // console.log(this.lngr);
+    // console.log(this.latr);
+    //this.getDirection();
   }
-  // private getUserLocation() {
-  //   /// locate the user
-  //
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(position => {
-  //       this.lat = position.coords.latitude;
-  //       this.lng = position.coords.longitude;
-  //       this.origin = { lat: this.lat, lng: this.lng };
-  //       this.destination = { lat: 52.220072, lng: 21.0121157 };
-  //     });
-  //
-  //
-  //   }
-  //  }
-  getDirection() {
+  private getUserLocation() {
+    /// locate the user
 
-  console.log("basia ian  niaa");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        this.origin = { lat: this.latr, lng: this.lngr};
-        //this.origin = { lat: 52.1912856, lng: 20.9540901 };
-        //this.origin = { lat: 52.214711, lng: 20.955437 };
-        this.destination  = { lat: 52.220072, lng: 21.0121157 };
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+        //this.origin = { lat: this.lat, lng: this.lng };
+        this.origin = { lat: OrderService.lat, lng: OrderService.lng};
+        this.destination = { lat: 52.220072, lng: 21.0121157 };
       });
+
+
     }
-  }
+   }
+  // getDirection() {
+  //
+  // console.log("basia ian  niaa");
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(position => {
+  //       this.origin = { lat: this.latr, lng: this.lngr};
+  //       //this.origin = { lat: 52.1912856, lng: 20.9540901 };
+  //       //this.origin = { lat: 52.214711, lng: 20.955437 };
+  //       this.destination  = { lat: 52.220072, lng: 21.0121157 };
+  //     });
+  //   }
+  // }
 
 
 }

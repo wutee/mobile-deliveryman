@@ -3,6 +3,7 @@ import {OrderService} from './order.service';
 import {FoodOrder, FoodOrderResourceService} from '../../client';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {timeout} from 'rxjs/operators';
 
 
 @Component({
@@ -42,14 +43,14 @@ export class OrdersPage {
     this.selectedOrder = order;
   }
 
-  async getMap(order) {
-    await this.orderService.setSelectedOrders(order.restaurant.latitude, order.restaurant.longitude);
-    console.log("orders");
-    //this.orderService.setOrder(order);
-    //window.location.replace('tabs/(map:map)');
+  getMap(order) {
+    this.orderService.setSelectedOrders(order.restaurant.latitude, order.restaurant.longitude);
+    //setTimeout(  window.location.replace('tabs/(map:map)'), 50);
+    this.router.navigateByUrl('tabs/(map:map)');
   }
   getMap2(order) {
-    window.location.replace('tabs/(map:map)');
+    this.orderService.setSelectedOrders(order.restaurant.latitude, order.restaurant.longitude);
+    this.router.navigateByUrl('tabs/(map:map)');
   }
 
   goBack() {
