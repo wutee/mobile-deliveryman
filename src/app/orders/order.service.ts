@@ -16,11 +16,10 @@ export class OrderService {
   private awaitingOrders: FoodOrder[] = [];
   private activeOrders: FoodOrder[] = [];
   private deliveredOrders: FoodOrder[] = [];
-  private myAccount: IUser;
+  private myAccount;
 
 
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.myAccount = this.authService.whoAmI();
   }
 
   getAwaitingOrders(): Observable<FoodOrder[]> {
@@ -35,9 +34,12 @@ export class OrderService {
   }
 
   getMyActiveOrders(): Observable<FoodOrder[]> {
+    this.authService.me().subscribe(() => {
+      this.myAccount = this.authService.whoAmI();
+    });
     return this.http.get<FoodOrder[]>('api/food-orders')
       .pipe(
-        map(i => i.filter(a => a.status === OrderStatus.IN_DELIVERY)),
+        map(i => i.filter(a => a.status === OrderStatus.IN_DELIVERY && a.deliveryman != null && this.myAccount.id === a.deliveryman.id)),
         tap(i => {
           this.activeOrders = i;
         })
@@ -46,40 +48,18 @@ export class OrderService {
   }
 
   getMyDeliveredOrders(): Observable<FoodOrder[]> {
+    this.authService.me().subscribe(() => {
+      this.myAccount = this.authService.whoAmI();
+    });
     return this.http.get<FoodOrder[]>('api/food-orders')
       .pipe(
-        map(i => i.filter(a => a.status === OrderStatus.DELIVERED)),
+        map(i => i.filter(a => a.status === OrderStatus.DELIVERED && a.deliveryman != null && this.myAccount.id === a.deliveryman.id)),
         tap(i => {
           this.deliveredOrders = i;
         })
       );
 
   }
-
-  // getMyActiveOrders(): Observable<FoodOrder[]> {
-  //   return this.http.get<FoodOrder[]>('api/food-orders').pipe(
-  //     map(i => i.filter(
-  //       a => a.deliveryman && a.deliveryman.email === this.myAccount.email && a.status === OrderStatus.IN_DELIVERY)),
-  //     tap(i => {
-  //       this.foodOrders = i;
-  //       console.log(i);
-  //     })
-  //   );
-  //
-  // }
-  //
-  // getMyDeliveredOrders(): Observable<FoodOrder[]> {
-  //   return this.http.get<FoodOrder[]>('api/food-orders')
-  //     .pipe(
-  //       map(i => i.filter(
-  //         a => this.myAccount && a.deliveryman && a.deliveryman.email === this.myAccount.email && a.status === OrderStatus.DELIVERED)),
-  //       tap(i => {
-  //         this.foodOrders = i;
-  //         console.log(i);
-  //       })
-  //     );
-  //
-  // }
 
   getAwaitingOrdersWithPhrase(phrase: string): Observable<FoodOrder[]> {
     return from([
