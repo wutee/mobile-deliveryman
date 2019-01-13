@@ -55,8 +55,15 @@ export class OrdersPage {
     this.selectedOrder = order;
   }
 
-  getMap(orderId: number): void {
-    this.router.navigate(['map', orderId]);
+  getMap(order) {
+    console.log("order");
+    console.log(order);
+    this.orderService.setSelectedOrders(order.restaurant.latitude, order.restaurant.longitude);
+    this.router.navigateByUrl('tabs/(map:map)');
+  }
+  getMap2(order) {
+    this.orderService.setSelectedOrders(order.restaurant.latitude, order.restaurant.longitude);
+    this.router.navigateByUrl('tabs/(map:map)');
   }
 
   goBack() {

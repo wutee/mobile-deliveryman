@@ -17,7 +17,10 @@ export class OrderService {
   private activeOrders: FoodOrder[] = [];
   private deliveredOrders: FoodOrder[] = [];
   private myAccount;
-
+  public id: number;
+  public order: string;
+  public lat: number;
+  public lng: number;
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -89,5 +92,25 @@ export class OrderService {
       status: OrderStatus.IN_DELIVERY
     };
     return this.http.put<FoodOrder>('api/food-orders/', updatedOrder);
+  }
+  setSelectedOrder(id: number) {
+    this.id = id;
+    console.log("serwicet");
+    console.log(this.id);
+
+  }
+  setSelectedOrders(lat: number, lng: number){
+    this.lat = lat;
+    this.lng = lng;
+    // OrderService.lat= lat;
+    // OrderService.lng= lng;
+  }
+  get_id() {
+    return this.id;
+  }
+  setOrder(order: string) {
+    this.order = order;
+    console.log("order::");
+    console.log(this.order);
   }
 }
