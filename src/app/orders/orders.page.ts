@@ -55,6 +55,11 @@ export class OrdersPage {
     this.selectedOrder = order;
   }
 
+  setDelivered(order) {
+    this.orderService.setOrderAsDelivered(order)
+      .subscribe(() => this.getOrders());
+  }
+
   getMap(order) {
     console.log("order");
     console.log(order);

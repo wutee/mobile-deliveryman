@@ -51,6 +51,7 @@
       </ion-card-content>
       <ion-button size="small" color="success" (click)="getDetails(order)">Details</ion-button>
       <ion-button size="small" color="success" (click)="getMap(order)">Map</ion-button>
+      <ion-button size="small" color="success" (click)="setDelivered(order)">Delivered</ion-button>
     </ion-card>
 
     <ion-card *ngFor="let order of deliveredOrders$ | async">
@@ -61,10 +62,10 @@
       </ion-card-title>
       <ion-card-content>
         Address: {{ order.restaurant.address }}<br>
-        Price: {{ order.price }}
+        Price: {{ order.price }} PLN
       </ion-card-content>
       <ion-button size="small" color="success" (click)="getDetails(order)">Details</ion-button>
-      <ion-button size="small" color="success" (click)="getMap(order.id)">Map</ion-button>
+      <ion-button size="small" color="success" (click)="getMap(order)">Map</ion-button>
     </ion-card>
   </div>
   <div inset *ngIf="!isList">

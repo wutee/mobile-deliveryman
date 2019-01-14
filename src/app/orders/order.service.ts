@@ -93,6 +93,15 @@ export class OrderService {
     };
     return this.http.put<FoodOrder>('api/food-orders/', updatedOrder);
   }
+
+  setOrderAsDelivered(order: FoodOrder): Observable<any> {
+    const updatedOrder: FoodOrder = {
+      ...order,
+      status: OrderStatus.DELIVERED
+    };
+    return this.http.put<FoodOrder>('api/food-orders/', updatedOrder);
+  }
+
   setSelectedOrder(id: number) {
     this.id = id;
     console.log("serwicet");
