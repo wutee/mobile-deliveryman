@@ -50,7 +50,7 @@
         Price: {{ order.price }}
       </ion-card-content>
       <ion-button size="small" color="success" (click)="getDetails(order)">Details</ion-button>
-      <ion-button size="small" color="success" (click)="getMap(order.id)">Map</ion-button>
+      <ion-button size="small" color="success" (click)="getMap(order)">Map</ion-button>
     </ion-card>
 
     <ion-card *ngFor="let order of deliveredOrders$ | async">
