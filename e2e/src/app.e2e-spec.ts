@@ -30,7 +30,5 @@ describe('new App', () => {
     browser.sleep(2000);
     expect(page.getHOneMarkup().getText()).toContain('Welcome to home page');
     browser.driver.sleep(2000);
-    page.navigateToURL('/tabs/(orders:orders)');
-    expect(page.getHOneMarkup().getText()).toContain('Your orders list');
   });
 });
